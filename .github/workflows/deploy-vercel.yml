@@ -9,8 +9,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: production
     env:
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN || vars.VERCEL_TOKEN }}
       VERCEL_SCOPE: vamshis-projects-9a4d887a
     steps:
       - uses: actions/checkout@v4
@@ -18,7 +19,7 @@ jobs:
       - name: Check Vercel token
         run: |
           if [ -z "$VERCEL_TOKEN" ]; then
-            echo "::error::VERCEL_TOKEN repository secret is not configured."
+            echo "::error::VERCEL_TOKEN is not available as a repository/environment secret or variable."
             exit 1
           fi
 
