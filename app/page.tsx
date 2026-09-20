@@ -247,7 +247,7 @@ function SimpleView({ tab }: { tab: Exclude<Tab, "Home" | "Trade"> }) {
   return (
     <>
       <div className="pageHead"><div><p className="eyebrow">{tab.toUpperCase()}</p><h1>{tab}</h1><span>Designed as a production integration surface for the FinOrbit platform.</span></div></div>
-      <div className="simpleGrid">{cards.map((c, i) => <article className="card simple" key={c[0]}><i>{["◫","↗","◎","⚙"][i]}</i><h3>{c[0]}</h3><p>{c[1]}</p><button>Open →</button></article>)}</div>
+      <div className="simpleGrid">{cards.map((c, i) => <article className="card simple" key={c[0]}><i>{["◫","↗","◎","⚙"][i]}</i><h3>{c[0]}</h3><p>{c[1]}</p>{tab === "Profile" && c[0] === "KYC" ? <a href="/kyc">Start KYC →</a> : <button>Open →</button>}</article>)}</div>
     </>
   );
 }
