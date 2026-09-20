@@ -5,7 +5,7 @@ An original India-focused fintech starter that combines personal money managemen
 ## Current MVP
 
 - Responsive Home dashboard with net worth, monthly budget, activity and savings pots
-- Pay, Wealth and Profile integration surfaces
+- Pay, Wealth and Profile integration surfaces\n- End-to-end sandbox KYC onboarding at `/kyc`: mobile/PAN, Aadhaar Offline XML or DigiLocker reference, liveness, bank verification, consent and status
 - Trade terminal with watchlist, streaming demo quotes and interactive instrument selection
 - Buy/Sell paper order ticket with quantity and order type controls
 - ₹10,00,000 paper account with simulated fills and recent order history
@@ -55,3 +55,12 @@ Market WebSocket + order APIs
 7. Audit logs, MFA, device/session controls and observability
 
 FinOrbit uses original branding and UI. It is not affiliated with Jupiter.
+
+
+## KYC architecture
+
+The KYC UI and API flow run end-to-end in `KYC_MODE=sandbox`. The sandbox intentionally does not issue a real KYC approval.
+
+For production, set `KYC_MODE=live` only after implementing a contracted regulated provider/KRA adapter. Final onboarding status must come from provider/KRA callbacks. Do not treat local validation, UI state, or a browser response as regulatory approval.
+
+The Aadhaar path is designed around offline signed XML / approved DigiLocker-style provider integration so the application does not need to collect the full Aadhaar number directly.
